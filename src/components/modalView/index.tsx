@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Text, Pressable, View, SafeAreaView, Image, ScrollView } from "react-native";
+import { Modal, Text, Pressable, View, SafeAreaView, Image, ScrollView, ActivityIndicator } from "react-native";
 import { get } from "../../services";
 
 import { detail, modalStyle } from '../../styles';
@@ -10,6 +10,7 @@ function SystemModal(props: any) {
     let { centeredView, sections, textStyle, modalText, close, layout, heading, modalView, keys, textLayout, number } = modalStyle || {};
 
     const [dataItem, setDataItem] = useState<any>({ data: {}, location: {}, episodes: [] });
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         if (visible) getDetails();
@@ -18,6 +19,7 @@ function SystemModal(props: any) {
 
     const getDetails = async () => {
         let epiArr = [];
+        setLoading(true);
         try {
             let response = await get(selectedItem);
 
@@ -28,8 +30,10 @@ function SystemModal(props: any) {
                 epiArr?.push(await get(episode[i]));
             }
             setDataItem({ ...dataItem, data: rest, location: loc, episodes: epiArr });
+            setLoading(false);
         } catch (e) {
-            console.log("Error", e)
+            console.log("Error", e);
+            setLoading(false);
         }
     }
 
@@ -115,7 +119,7 @@ function SystemModal(props: any) {
                         <Text style={modalText}>{'X'}</Text>
                     </Pressable>
                 </View>
-                {renderModalView()}
+                {loading ? <ActivityIndicator size={'large'} color={'#01579B'} /> :  renderModalView()}
             </SafeAreaView>
         </Modal>
     );
