@@ -3,8 +3,7 @@ import { View, FlatList, ActivityIndicator, Text, SafeAreaView, Image, Pressable
 import { get } from "../../services";
 import { listStyle, screen } from "../../styles";
 import { colorCode, keyExtractor } from "../../utills";
-import FooterView from "../footerBtn";
-import SystemModal from "../modalView";
+import { FooterView, SystemModal } from '../../components';
 
 const SystemListView = () => {
     const [data, setData] = useState<Array<any>>([]);
