@@ -77,13 +77,13 @@ function SystemModal(props: any) {
                                 let date = (new Date(created)).toString().split(' ').splice(1,3).join(' ');
                                 if (name) {
                                     return (
-                                        <View>
+                                        <View key = {index}>
                                             <Text style={number}>{`${index + 1} . `}</Text>
                                             {
                                                 [{ id: 'name', value: name }, { id: 'episode', value: episode }, { id: 'air_date', value: air_date }, { id: 'created', value: date }]?.map((ef, key) => {
                                                     let { id, value } = ef || {};
                                                     return (
-                                                        <View style={{ flex: 1, paddingHorizontal: 24 }}>
+                                                        <View key = {key} style={{ flex: 1, paddingHorizontal: 24 }}>
                                                             <View key={index} style={textLayout}>
                                                                 <Text style={keys}>{`${id} : `}</Text>
                                                                 <Text style={{ fontSize: 16 }}>{value || '--'}</Text>

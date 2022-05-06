@@ -40,12 +40,13 @@ const FooterView = (props: Iprops) => {
                                 if (visible) {
                                     return (
                                         <Button
+                                            key = {k}
                                             title={name}
                                             color={'#01579B'}
                                             onPress={onPress}
                                         />
                                     )
-                                } else return <View style={{ alignItems: 'flex-end' }} />
+                                } else return <View key = {k + 10} style={{ alignItems: 'flex-end' }} />
                             })
                         }
                     </View>
